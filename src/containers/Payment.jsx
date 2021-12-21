@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/components/Payment.css";
 import AppContext from "../context/AppContext";
-import { PayPalButton } from "react-paypal-button";
+import { PayPalButton } from "react-paypal-button-v2";
 import handleSumTotal from "../utils/handleSumTotal";
 import pass from "../utils/pass";
 
@@ -54,8 +54,8 @@ const Payment = () => {
             amount={handleSumTotal(cart)}
             onPaymentStart={() => console.log('Start payment')}
             onPaymentSuccess={data => handlePaymentSuccess(data)}
-            onPaymentError={error => console.log(error)}
-            onPaymentCancel={data => console.log(data)}
+            onError={error => console.log(error)}
+            onCancel={data => console.log(data)}
           />
         </div>
       </div>
