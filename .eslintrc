@@ -35,6 +35,7 @@
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "requireConfigFile:"
-  }
+    "requireConfigFile": false
+  },
+  "react/function-component-definition": "arrow-function"
 }
