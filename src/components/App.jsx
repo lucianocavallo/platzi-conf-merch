@@ -1,7 +1,4 @@
 import React from 'react';
-
-const hola = 'hola'
-
 import '../styles/App.css';
 
 const App = () => {
