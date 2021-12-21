@@ -10,6 +10,7 @@ const Payment = () => {
   const { state, addNewOrder } = useContext(AppContext);
   const { cart, buyer } = state;
   const navigate = useNavigate();
+  const sum = handleSumTotal(cart);
 
   const paypalOptions = {
     clientId: pass.paypalPaymentClientID,
@@ -23,7 +24,6 @@ const Payment = () => {
   }
 
   const handlePaymentSuccess = (data) => {
-    console.log(data);
     if(data.status === 'COMPLETED') {
       const newOrder = {
         buyer,
@@ -49,11 +49,21 @@ const Payment = () => {
         ))}
         <div className="Payment-button">
           <PayPalButton
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    currency_code: "USD",
+                    value: sum
+                  }
+                }],
+              });
+            }}
             paypalOptions={paypalOptions}
             buttonStyles={buttonStyles}
-            amount={handleSumTotal(cart)}
+            amount={sum}
             onPaymentStart={() => console.log('Start payment')}
-            onPaymentSuccess={data => handlePaymentSuccess(data)}
+            onSuccess={data => handlePaymentSuccess(data)}
             onError={error => console.log(error)}
             onCancel={data => console.log(data)}
           />
